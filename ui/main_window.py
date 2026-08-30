@@ -1,9 +1,9 @@
-from PySide6.QtGui import QCloseEvent
-from PySide6.QtCore import Qt
-from PySide6.QtWidgets import QMainWindow, QFileDialog, QMessageBox, QToolButton
-from editor import CodeEditor
+from PySide6.QtGui import QCloseEvent, QKeySequence, QShortcut
+from PySide6.QtWidgets import QMainWindow, QFileDialog, QMessageBox, QVBoxLayout, QWidget
+from editor.code_editor import CodeEditor
 from files.file_manager import FileManager
-from .file_menu import FileMenu
+from ui.file_menu import FileMenu
+from ui.top_bar import TopBar
 
 
 
@@ -12,19 +12,39 @@ class MainWindow(QMainWindow):
         super().__init__()
         self.setWindowTitle("lil code")
         self.resize(600,300)
+        self.central_container = QWidget()
+        self.central_layout = QVBoxLayout(self.central_container)
+        self.central_layout.setContentsMargins(0, 0, 0, 0)
+        self.central_layout.setSpacing(0)
+        self.top_bar = TopBar()
+        self.central_layout.addWidget(self.top_bar)
+
         self.file_manager = FileManager()
         self.code_editor = CodeEditor()
+        self.central_layout.addWidget(self.code_editor)
+        self.setCentralWidget(self.central_container)
         self.setup_file_menu()
+        self.setup_menu_shortcut()
         self.connect_actions()
-        self.setCentralWidget(self.code_editor)
         self.update_window_title()
+
+        self.code_editor.editor.textChanged.connect(self.update_window_title)
 
     def update_window_title(self) -> None:
         if self.file_manager.current_file is None:
-            filename = 'untitled'
+            filename = "untitled"
         else:
             filename = self.file_manager.current_file.name
-        self.setWindowTitle(f'lil code - {filename}')
+
+        if self.has_unsaved_changes():
+            filename = f"{filename}[*]"
+
+        self.setWindowTitle(f"lil code - {filename}")
+        self.top_bar.label_file.setText(filename)
+
+    def has_unsaved_changes(self) -> bool:
+        current_content = self.code_editor.editor.toPlainText()
+        return self.file_manager.has_unsaved_changes(current_content)
 
     def closeEvent(self, event: QCloseEvent) -> None:
         if self.confirm_unsaved_changes():
@@ -34,21 +54,47 @@ class MainWindow(QMainWindow):
 
     def setup_file_menu(self) -> None:
         self.file_menu = FileMenu(self)
-        self.menu_button = QToolButton(self)
-        self.menu_button.setText("☰")
-        self.menu_button.setMenu(self.file_menu)
-        self.menu_button.setPopupMode(QToolButton.ToolButtonPopupMode.InstantPopup)
-        self.menuBar().setCornerWidget(self.menu_button, Qt.Corner.TopLeftCorner)
-        self.menuBar().setStyleSheet("background-color: #8bc8fe ; color: #051b2c; border: none")
+        self.menuBar().addMenu(self.file_menu)
+        self.menuBar().setStyleSheet("""
+            QMenuBar {
+                background-color: #8bc8fe;
+                color: #051b2c;
+                border: none;
+                font-family: "Consolas";
+                font-size: 10px;
+                padding-left: 2px;
+            }
+        """)
+        self.menuBar().setNativeMenuBar(False)
+        self.menuBar().hide()
+
+    def setup_menu_shortcut(self):
+        self.menu_shortcut = QShortcut(QKeySequence("Ctrl + M"), self)
+        self.menu_shortcut.activated.connect(self.toggle_menu_bar)
+
+    def toggle_menu_bar(self):
+        menu_bar = self.menuBar()
+        menu_bar.setVisible(not menu_bar.isVisible())
+
 
     def connect_actions(self) -> None:
+        file_actions = (
+            self.file_menu.new_action,
+            self.file_menu.open_action,
+            self.file_menu.save_action,
+            self.file_menu.save_as_action,
+        )
+
+        for action in file_actions:
+            self.addAction(action)
+
         self.file_menu.new_action.triggered.connect(self.new_file)
         self.file_menu.open_action.triggered.connect(self.open_file)
         self.file_menu.save_as_action.triggered.connect(self.save_as)
         self.file_menu.save_action.triggered.connect(self.save)
 
     def confirm_unsaved_changes(self) -> bool:
-        if self.code_editor.editor.document().isModified():
+        if self.has_unsaved_changes():
             msg_box = QMessageBox(self)
             msg_box.setWindowTitle("Save Changes")
             msg_box.setText("You have unsaved changes. Do you want to save them?")
