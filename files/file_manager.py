@@ -12,10 +12,6 @@ class FileManager:
 
     def open_file(self, path: str | Path) -> str:
         target = Path(path)
-
-        if not target.exists():
-            raise FileNotFoundError(f"Arquivo {path} não encontrado")
-
         content = target.read_text(encoding="utf-8")
         self.current_file = target
         self.saved_content = content
@@ -29,8 +25,6 @@ class FileManager:
 
     def save_as(self, path: str | Path, content: str) -> None:
         target = Path(path)
-        if not target.parent.exists():
-            raise FileNotFoundError(f"Diretório {target.parent} não encontrado")
         target.write_text(content, encoding="utf-8")
         self.current_file = target
         self.saved_content = content
