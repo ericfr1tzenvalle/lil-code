@@ -1,0 +1,134 @@
+/* Editor */
+QWidget#codeEditor, QPlainTextEdit#sourceEditor {
+    background-color: #282A36;
+    border: none;
+    color: #F8F8F2;
+    padding: 10px;
+    selection-background-color: #44475A;
+    selection-color: #F8F8F2;
+}
+
+/* Header */
+QWidget#topBar, QWidget#topBar QLabel, QWidget#topBar QPushButton {
+    background-color: #21222C;
+    color: #ffffff;
+    font-family: "Consolas";
+    font-size: 16px;
+    font-weight: bold;
+}
+
+QWidget#topBar QLabel#appName {
+    font-family: "Devinne Swash"; /* By Dieter Steffmann — https://www.dafont.com/pt/devinne-swash.font */
+    font-size: 20px;
+}
+
+QWidget#topBar QLabel#fileName {
+    color: #CDB4F5;
+    font-size: 13px;
+    font-weight: normal;
+}
+
+QWidget#topBar QPushButton#runButton {
+    border: none;
+    color: #50FA7B;
+}
+
+/* Menus */
+QMenuBar {
+    background-color: #21222C;
+    color: #F8F8F2;
+    border: none;
+    font-family: "Consolas";
+    font-size: 10px;
+    padding-left: 2px;
+}
+
+QMenu {
+    background-color: #282A36;
+    color: #F8F8F2;
+    border: none;
+    font-family: "Consolas";
+    font-size: 10px;
+    margin-left: 5px;
+}
+
+QMenu::item:selected {
+    background-color: #44475A;
+    color: #F8F8F2;
+}
+
+QMenu::item:disabled {
+    color: #8B93B5;
+}
+
+QMenu::separator {
+    height: 1px;
+    background-color: #44475A;
+    margin: 5px 8px;
+}
+
+/* Dialogs */
+QDialog, QDialog QWidget {
+    background-color: #282A36;
+    color: #F8F8F2;
+}
+
+QDialog QLabel {
+    background-color: transparent;
+}
+
+QDialog QPushButton, QDialog QToolButton {
+    background-color: #44475A;
+    border: 1px solid #6272A4;
+    border-radius: 4px;
+    padding: 6px 12px;
+}
+
+QDialog QPushButton:hover, QDialog QToolButton:hover {
+    background-color: #565A73;
+    border-color: #BD93F9;
+}
+
+QDialog QPushButton:pressed, QDialog QToolButton:pressed {
+    background-color: #21222C;
+}
+
+QDialog QPushButton:default, QDialog QPushButton:focus,
+QDialog QToolButton:focus {
+    border-color: #BD93F9;
+}
+
+QDialog QPushButton:disabled, QDialog QToolButton:disabled {
+    color: #8B93B5;
+    border-color: #44475A;
+}
+
+QDialog QLineEdit, QDialog QComboBox, QDialog QTextEdit,
+QDialog QPlainTextEdit, QDialog QAbstractItemView {
+    background-color: #21222C;
+    color: #F8F8F2;
+    border: 1px solid #44475A;
+    selection-background-color: #44475A;
+    selection-color: #F8F8F2;
+}
+
+QDialog QLineEdit, QDialog QComboBox {
+    padding: 5px;
+    border-radius: 3px;
+}
+
+QDialog QLineEdit:focus, QDialog QComboBox:focus {
+    border-color: #BD93F9;
+}
+
+QDialog QAbstractItemView::item:selected {
+    background-color: #44475A;
+    color: #F8F8F2;
+}
+
+QDialog QHeaderView::section {
+    background-color: #44475A;
+    color: #F8F8F2;
+    border: none;
+    padding: 5px;
+}

@@ -55,16 +55,6 @@ class MainWindow(QMainWindow):
     def setup_file_menu(self) -> None:
         self.file_menu = FileMenu(self)
         self.menuBar().addMenu(self.file_menu)
-        self.menuBar().setStyleSheet("""
-            QMenuBar {
-                background-color: #8bc8fe;
-                color: #051b2c;
-                border: none;
-                font-family: "Consolas";
-                font-size: 10px;
-                padding-left: 2px;
-            }
-        """)
         self.menuBar().setNativeMenuBar(False)
         self.menuBar().hide()
 

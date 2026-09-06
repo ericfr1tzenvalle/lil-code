@@ -20,7 +20,7 @@ class PythonHighlighter(SyntaxHighlighter):
 
     def create_keyword_rule(self) -> HighlightRule:
         rule_format = QTextCharFormat()
-        rule_format.setForeground(QColor('#E5A3FF'))
+        rule_format.setForeground(QColor('#FF79C6'))
         rule_pattern = QRegularExpression(
             r'\b(and|as|assert|async|await|break|class|continue|def|del|'
             r'elif|else|except|finally|for|from|global|if|import|in|is|'
@@ -30,7 +30,7 @@ class PythonHighlighter(SyntaxHighlighter):
 
     def create_builtin_rule(self) -> HighlightRule:
         rule_format = QTextCharFormat()
-        rule_format.setForeground(QColor('#FFF176'))
+        rule_format.setForeground(QColor('#8BE9FD'))
         rule_pattern = QRegularExpression(
             r'\b(abs|aiter|all|anext|any|ascii|bin|bool|breakpoint|bytearray|'
             r'bytes|callable|chr|classmethod|compile|complex|delattr|dict|dir|'
@@ -44,13 +44,13 @@ class PythonHighlighter(SyntaxHighlighter):
 
     def create_literal_constant_rule(self) -> HighlightRule:
         rule_format = QTextCharFormat()
-        rule_format.setForeground(QColor('#FFB86C'))
+        rule_format.setForeground(QColor('#BD93F9'))
         rule_pattern = QRegularExpression(r'\b(True|False|None)\b')
         return HighlightRule(rule_pattern, rule_format)
 
     def create_number_rule(self) -> HighlightRule:
         rule_format = QTextCharFormat()
-        rule_format.setForeground(QColor('#FFB86C'))
+        rule_format.setForeground(QColor('#BD93F9'))
         rule_pattern = QRegularExpression(
             r'(?<!\w)(?:0[xX](?:_?[0-9a-fA-F])+|0[bB](?:_?[01])+'
             r'|0[oO](?:_?[0-7])+|(?:[0-9](?:_?[0-9])*(?:\.(?:[0-9](?:_?[0-9])*)?)?'
@@ -60,7 +60,7 @@ class PythonHighlighter(SyntaxHighlighter):
 
     def create_operator_rule(self) -> HighlightRule:
         rule_format = QTextCharFormat()
-        rule_format.setForeground(QColor('#F4F7FF'))
+        rule_format.setForeground(QColor('#FF79C6'))
         rule_pattern = QRegularExpression(
             r'\*\*=?|//=?|<<=?|>>=?|:=|->|[+\-*/%@&|^]=?|[<>=!]=|[<>=~]'
         )
@@ -68,7 +68,7 @@ class PythonHighlighter(SyntaxHighlighter):
 
     def create_decorator_rule(self) -> HighlightRule:
         rule_format = QTextCharFormat()
-        rule_format.setForeground(QColor('#FF8FCC'))
+        rule_format.setForeground(QColor('#FFB86C'))
         rule_pattern = QRegularExpression(
             r'^\s*\K@[^\W\d]\w*(?:\.[^\W\d]\w*)*',
             QRegularExpression.PatternOption.UseUnicodePropertiesOption,
@@ -77,7 +77,7 @@ class PythonHighlighter(SyntaxHighlighter):
 
     def create_function_definition_rule(self) -> HighlightRule:
         rule_format = QTextCharFormat()
-        rule_format.setForeground(QColor('#70DDFF'))
+        rule_format.setForeground(QColor('#50FA7B'))
         rule_pattern = QRegularExpression(
             r'\bdef\s+\K[^\W\d]\w*',
             QRegularExpression.PatternOption.UseUnicodePropertiesOption,
@@ -86,7 +86,7 @@ class PythonHighlighter(SyntaxHighlighter):
 
     def create_class_definition_rule(self) -> HighlightRule:
         rule_format = QTextCharFormat()
-        rule_format.setForeground(QColor('#5FF2D6'))
+        rule_format.setForeground(QColor('#8BE9FD'))
         rule_pattern = QRegularExpression(
             r'\bclass\s+\K[^\W\d]\w*',
             QRegularExpression.PatternOption.UseUnicodePropertiesOption,
@@ -95,7 +95,7 @@ class PythonHighlighter(SyntaxHighlighter):
 
     def create_string_rule(self) -> HighlightRule:
         rule_format = QTextCharFormat()
-        rule_format.setForeground(QColor('#B4F58C'))
+        rule_format.setForeground(QColor('#F1FA8C'))
         rule_pattern = QRegularExpression(
             r'''(?i:\b(?:br|rb|fr|rf|r|u|b|f))?(?:"(?:\\.|[^"\\])*(?:"|$)|'(?:\\.|[^'\\])*(?:'|$))'''
         )
@@ -103,6 +103,6 @@ class PythonHighlighter(SyntaxHighlighter):
 
     def create_comment_rule(self) -> HighlightRule:
         rule_format = QTextCharFormat()
-        rule_format.setForeground(QColor('#91A9BD'))
+        rule_format.setForeground(QColor('#8B93B5'))
         rule_pattern = QRegularExpression(r'#[^\n]*')
         return HighlightRule(rule_pattern, rule_format)

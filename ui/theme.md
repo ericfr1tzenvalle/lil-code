@@ -1,11 +1,16 @@
-## Dark Theme
-   -  Background: #0D1014
-   -  Header: #12161B
-   -  Border / Divider:  #242A33
+## Dark Theme — Dracula inspired
 
-   -  Primary Text: #EBEBEC
-   -  Muted Text: #767A80
-   -  Line Numbers: #767A80
+- Background: #282A36
+- Header: #21222C
+- Border / Divider / Selection: #44475A
+- Primary Text: #F8F8F2
+- Muted Text / Comments: #8B93B5
+- Keywords / Operators: #FF79C6
+- Builtins / Classes: #8BE9FD
+- Numbers / Literal Constants: #BD93F9
+- Functions / Run Button: #50FA7B
+- Strings: #F1FA8C
+- Decorators: #FFB86C
 
 ## MonoLucid Theme
 
